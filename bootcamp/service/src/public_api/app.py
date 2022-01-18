@@ -7,6 +7,7 @@ from prometheus_client.exposition import CONTENT_TYPE_LATEST
 from prometheus_client import Counter
 import redis
 import requests
+from opentelemetry import trace
 
 
 def _normalize(text):
@@ -38,6 +39,8 @@ def metrics():
 def wordcount():
     file = request.files['text']
     fn = file.filename
+    
+    trace.get_current_span().set_attribute("fileName", fn)
 
     cached = r.get(fn)
 
