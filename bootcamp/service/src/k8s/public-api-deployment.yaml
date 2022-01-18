@@ -35,6 +35,8 @@ spec:
               value: deployment.environment=YOURNAME-dev
             - name: OTEL_SERVICE_NAME
               value: public-api
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: service.version=1.13
             - name: REDIS_URL
               value: redis://cache
           image: docker.registry/public_api
